@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Skills by Course - Student Skills Portal{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1><i class="fas fa-book me-2"></i>Skills by Course</h1>
+    <div>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary">
+            <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+        </a>
+    </div>
+</div>
+
+{% if courses %}
+<div class="row">
+    {% for course, skills in courses.items() %}
+    <div class="col-lg-6 mb-4">
+        <div class="card h-100">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-book-open me-2 text-primary"></i>
+                    {{ course }}
+                </h5>
+                <span class="badge bg-primary">{{ skills|length }} skill{{ 's' if skills|length != 1 else '' }}</span>
+            </div>
+            <div class="card-body">
+                <!-- Skills Grid -->
+                <div class="row">
+                    {% for skill in skills %}
+                    <div class="col-12 mb-3">
+                        <div class="d-flex align-items-start">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-cog text-success me-2 mt-1"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">{{ skill.name }}</h6>
+                                {% if skill.description %}
+                                <p class="text-muted small mb-1">{{ skill.description }}</p>
+                                {% endif %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        {{ skill.students|length }} student{{ 's' if skill.students|length != 1 else '' }}
+                                    </small>
+                                    {% if skill.students %}
+                                    <div>
+                                        {% for student in skill.students[:3] %}
+                                        <span class="badge bg-secondary me-1">{{ student.username }}</span>
+                                        {% endfor %}
+                                        {% if skill.students|length > 3 %}
+                                        <span class="badge bg-info">+{{ skill.students|length - 3 }}</span>
+                                        {% endif %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="d-flex justify-content-between align-items-center">
+                    <small class="text-muted">
+                        Total students with {{ course }} skills: 
+                        {% set unique_students = [] %}
+                        {% for skill in skills %}
+                            {% for student in skill.students %}
+                                {% if student not in unique_students %}
+                                    {% if unique_students.append(student) %}{% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        <strong>{{ unique_students|length }}</strong>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Course Statistics -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Course Statistics</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Course</th>
+                                <th>Total Skills</th>
+                                <th>Students Enrolled</th>
+                                <th>Most Popular Skill</th>
+                                <th>Coverage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for course, skills in courses.items() %}
+                            {% set unique_students = [] %}
+                            {% for skill in skills %}
+                                {% for student in skill.students %}
+                                    {% if student not in unique_students %}
+                                        {% if unique_students.append(student) %}{% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            {% set most_popular = skills | sort(attribute='students') | reverse | first %}
+                            <tr>
+                                <td>
+                                    <strong class="text-primary">{{ course }}</strong>
+                                </td>
+                                <td>
+                                    <span class="badge bg-secondary">{{ skills|length }}</span>
+                                </td>
+                                <td>
+                                    <span class="badge bg-success">{{ unique_students|length }}</span>
+                                </td>
+                                <td>
+                                    {% if most_popular %}
+                                    {{ most_popular.name }} 
+                                    <small class="text-muted">({{ most_popular.students|length }} students)</small>
+                                    {% else %}
+                                    <em class="text-muted">No students</em>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if unique_students|length > 0 %}
+                                    <div class="progress" style="height: 20px;">
+                                        <div class="progress-bar bg-success" role="progressbar" 
+                                             style="width: 100%"
+                                             aria-valuenow="100" 
+                                             aria-valuemin="0" 
+                                             aria-valuemax="100">
+                                            {{ unique_students|length }} students
+                                        </div>
+                                    </div>
+                                    {% else %}
+                                    <span class="text-muted">No students</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="card">
+    <div class="card-body text-center py-5">
+        <i class="fas fa-book fa-5x text-muted mb-4"></i>
+        <h4>No Skills Available</h4>
+        <p class="text-muted mb-4">There are no skills defined in the system yet.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            <i class="fas fa-tachometer-alt me-2"></i>Go to Dashboard
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

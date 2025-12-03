@@ -1,0 +1,124 @@
+2025-06-23 18:17:21,683 - semgrep.run_scan - DEBUG - semgrep version 1.4.0
+2025-06-23 18:17:21,758 - semgrep.git - DEBUG - Failed to get project url from 'git ls-remote': Command failed with exit code: 128
+-----
+Command failed with output:
+fatal: No remote configured to list refs from.
+
+
+Failed to run 'git ls-remote --get-url'. Possible reasons:
+
+- the git binary is not available
+- the current working directory is not a git repository
+- the baseline commit is not a parent of the current commit
+    (if you are running through semgrep-app, check if you are setting `SEMGREP_BRANCH` or `SEMGREP_BASELINE_COMMIT` properly)
+- the current working directory is not marked as safe
+    (fix with `git config --global --add safe.directory $(pwd)`)
+
+Try running the command yourself to debug the issue.
+2025-06-23 18:17:21,760 - semgrep.config_resolver - DEBUG - Loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-06-23 18:17:21,772 - semgrep.config_resolver - DEBUG - Done loading local config from /home/runner/workspace/.config/.semgrep/semgrep_rules.json
+2025-06-23 18:17:21,775 - semgrep.config_resolver - DEBUG - Saving rules to /tmp/semgrep-9tjtky04.rules
+2025-06-23 18:17:23,959 - semgrep.rule_lang - DEBUG - semgrep-core validation response: valid=True
+2025-06-23 18:17:23,959 - semgrep.rule_lang - DEBUG - semgrep-core validation succeeded
+2025-06-23 18:17:23,959 - semgrep.rule_lang - DEBUG - RPC validation succeeded
+2025-06-23 18:17:23,961 - semgrep.config_resolver - DEBUG - loaded 1 configs in 2.201690912246704
+2025-06-23 18:17:24,156 - semgrep.run_scan - VERBOSE - running 714 rules from 1 config /home/runner/workspace/.config/.semgrep/semgrep_rules.json_0
+2025-06-23 18:17:24,156 - semgrep.run_scan - VERBOSE - No .semgrepignore found. Using default .semgrepignore rules. See the docs for the list of default ignores: https://semgrep.dev/docs/cli-usage/#ignore-files
+2025-06-23 18:17:24,158 - semgrep.run_scan - VERBOSE - Rules:
+2025-06-23 18:17:24,158 - semgrep.run_scan - VERBOSE - <SKIPPED DATA (too many entries; use --max-log-list-entries)>
+2025-06-23 18:17:24,565 - semgrep.core_runner - DEBUG - Passing whole rules directly to semgrep_core
+2025-06-23 18:17:24,848 - semgrep.core_runner - DEBUG - Running Semgrep engine with command:
+2025-06-23 18:17:24,848 - semgrep.core_runner - DEBUG - /tmp/_MEID6fnR3/semgrep/bin/opengrep-core -json -rules /tmp/tmpryce_up7.json -j 8 -targets /tmp/tmp2aq1fkqi -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+2025-06-23 18:17:30,622 - semgrep.core_runner - DEBUG - --- semgrep-core stderr ---
+[00.28][[34mINFO[0m]: Executed as: /tmp/_MEID6fnR3/semgrep/bin/opengrep-core -json -rules /tmp/tmpryce_up7.json -j 8 -targets /tmp/tmp2aq1fkqi -timeout 5 -timeout_threshold 3 -max_memory 0 -fast
+[00.28][[34mINFO[0m]: Version: 1.4.0
+[00.28][[34mINFO[0m]: Parsing rules in /tmp/tmpryce_up7.json
+[01.61][[34mINFO[0m]: scan: processing 57 files (skipping 0), with 529 rules (skipping 0 )
+--- end semgrep-core stderr ---
+2025-06-23 18:17:30,631 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('main.py'), 'config..semgrep.vendored-rules.python.flask.security.audit.avoid_app_run_with_bad_host') match_id = f5a1d78d28043340433dedc0a20165e63b50d9aa4305aede97be74105c8207b5b89db08fa6703decc4ec27aafa081254be07d38814f40c19f447cf4721551845_0
+2025-06-23 18:17:30,632 - semgrep.rule_match - DEBUG - match_key = ('app.run(..., "0.0.0.0", ...) app.run(..., host="0.0.0.0", ...)', PosixPath('main.py'), 'config..semgrep.vendored-rules.python.flask.security.audit.avoid_app_run_with_bad_host') match_id = 5c1cbbc54bfaa7420b881ae9f997ad4b5ed5aa16b127a74e037d220112ac891aa501638c0e19641f765822573b5e6f14657485c6b72c0846fdec9bc63200dc57_0
+2025-06-23 18:17:30,633 - semgrep.rule_match - DEBUG - match_key = ('app.run(..., "0.0.0.0", ...) app.run(..., host="0.0.0.0", ...)', PosixPath('main.py'), 'config..semgrep.vendored-rules.python.flask.security.audit.avoid_app_run_with_bad_host') match_id = 5c1cbbc54bfaa7420b881ae9f997ad4b5ed5aa16b127a74e037d220112ac891aa501638c0e19641f765822573b5e6f14657485c6b72c0846fdec9bc63200dc57_0
+2025-06-23 18:17:30,634 - semgrep.rule_match - DEBUG - match_key = ('app.run(..., "0.0.0.0", ...) app.run(..., host="0.0.0.0", ...)', PosixPath('main.py'), 'config..semgrep.vendored-rules.python.flask.security.audit.avoid_app_run_with_bad_host') match_id = 5c1cbbc54bfaa7420b881ae9f997ad4b5ed5aa16b127a74e037d220112ac891aa501638c0e19641f765822573b5e6f14657485c6b72c0846fdec9bc63200dc57_0
+2025-06-23 18:17:30,635 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.flask.security.open-redirect') match_id = 3994054cd330b3661d7a5f3600654c5787579e9c924f5276e20c6697e0cbbc0f5056a3e0a499efb8c593698eeebba7e7456a66d0a7e62811d3f69e36c6551d3b_0
+2025-06-23 18:17:30,635 - semgrep.rule_match - DEBUG - match_key = ('next_page = flask.request.args\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args.get(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args[...]\n...\nflask.redirect(<... next_page ...>, ...)\n flask.redirect(<... flask.request.args ...>, ...) flask.redirect(<... flask.request.args(...) ...>, ...) flask.redirect(<... flask.request.args.get(...) ...>, ...) flask.redirect(<... flask.request.args[...] ...>, ...) @app.route(...)\ndef login(...):\n  ...\n @app.route(...)\ndef login(...):\n  ...\n  if <... werkzeug.urls.url_parse(next_page) ...>:\n    ...\n flask.redirect(f"{flask.request.path}...") flask.redirect(flask.request.path + ...) flask.redirect(flask.request.path)', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.flask.security.open-redirect') match_id = d596ff22bd2693a04584f46b81a9f0315864b8e43a706b7c547ade538bd66d0ace4862d7d2cc37d0cc31285934fea0be0a1fd3404fd168de37fad55e046a8c45_0
+2025-06-23 18:17:30,636 - semgrep.rule_match - DEBUG - match_key = ('next_page = flask.request.args\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args.get(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args[...]\n...\nflask.redirect(<... next_page ...>, ...)\n flask.redirect(<... flask.request.args ...>, ...) flask.redirect(<... flask.request.args(...) ...>, ...) flask.redirect(<... flask.request.args.get(...) ...>, ...) flask.redirect(<... flask.request.args[...] ...>, ...) @app.route(...)\ndef login(...):\n  ...\n @app.route(...)\ndef login(...):\n  ...\n  if <... werkzeug.urls.url_parse(next_page) ...>:\n    ...\n flask.redirect(f"{flask.request.path}...") flask.redirect(flask.request.path + ...) flask.redirect(flask.request.path)', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.flask.security.open-redirect') match_id = d596ff22bd2693a04584f46b81a9f0315864b8e43a706b7c547ade538bd66d0ace4862d7d2cc37d0cc31285934fea0be0a1fd3404fd168de37fad55e046a8c45_0
+2025-06-23 18:17:30,637 - semgrep.rule_match - DEBUG - match_key = ('next_page = flask.request.args\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args.get(...)\n...\nflask.redirect(<... next_page ...>, ...)\n next_page = flask.request.args[...]\n...\nflask.redirect(<... next_page ...>, ...)\n flask.redirect(<... flask.request.args ...>, ...) flask.redirect(<... flask.request.args(...) ...>, ...) flask.redirect(<... flask.request.args.get(...) ...>, ...) flask.redirect(<... flask.request.args[...] ...>, ...) @app.route(...)\ndef login(...):\n  ...\n @app.route(...)\ndef login(...):\n  ...\n  if <... werkzeug.urls.url_parse(next_page) ...>:\n    ...\n flask.redirect(f"{flask.request.path}...") flask.redirect(flask.request.path + ...) flask.redirect(flask.request.path)', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.flask.security.open-redirect') match_id = d596ff22bd2693a04584f46b81a9f0315864b8e43a706b7c547ade538bd66d0ace4862d7d2cc37d0cc31285934fea0be0a1fd3404fd168de37fad55e046a8c45_0
+2025-06-23 18:17:30,637 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = 589e457799ecc3791e09ed0ae4d0897d00ebc73b700b8f4060a69a56d420f8a523e2eeff29abdf5a366f8a7918d61ae640327ecce1bf89109ceee3755473a9ec_0
+2025-06-23 18:17:30,638 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_0
+2025-06-23 18:17:30,638 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_0
+2025-06-23 18:17:30,639 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_0
+2025-06-23 18:17:30,639 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = 589e457799ecc3791e09ed0ae4d0897d00ebc73b700b8f4060a69a56d420f8a523e2eeff29abdf5a366f8a7918d61ae640327ecce1bf89109ceee3755473a9ec_0
+2025-06-23 18:17:30,640 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_0
+2025-06-23 18:17:30,640 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_0
+2025-06-23 18:17:30,641 - semgrep.rule_match - DEBUG - match_key = ('student.set_password(form.password.data) UserModel().set_password(form.password.data) django.contrib.auth.password_validation.validate_password(...)\n...\n if <... django.contrib.auth.password_validation.validate_password(...) ...>:\n    ...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX as $E:\n  ...\n...\n try:\n  ...\n  django.contrib.auth.password_validation.validate_password(...)\n  ...\nexcept $EX:\n  ...\n...\n', PosixPath('routes.py'), 'config..semgrep.vendored-rules.python.django.security.audit.unvalidated-password') match_id = f20ad6a98a25ae3a5fdd14d00d12a3e0ea680f84bdb7223cf11c550b6850b511273214f8f4b4f7f73bb569c35a75810f85cccc8afa680d8aab2439ea0f191fb4_1
+2025-06-23 18:17:30,642 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = b6738baed7759a04b726eaaff7e69cad70ab6cb23e6f36fc8c04a281dc4b99f28e27704d89459363eb1b5bd772800ed367e2a70853de276cc1f28e7cca5151c5_0
+2025-06-23 18:17:30,642 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" > <script  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 99ba74761cc88b199c4b2ffd4626d8a8f7ac4076cc8131baeaca9ba23b148669b10fa50425a60cd89825a5b23e13385e99e962c6fa14e5bf2a94e429e28c6962_0
+2025-06-23 18:17:30,643 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" > <script  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 99ba74761cc88b199c4b2ffd4626d8a8f7ac4076cc8131baeaca9ba23b148669b10fa50425a60cd89825a5b23e13385e99e962c6fa14e5bf2a94e429e28c6962_0
+2025-06-23 18:17:30,643 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" > <script  href="https://cdn.replit.com/agent/bootstrap-agent-dark-theme.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 99ba74761cc88b199c4b2ffd4626d8a8f7ac4076cc8131baeaca9ba23b148669b10fa50425a60cd89825a5b23e13385e99e962c6fa14e5bf2a94e429e28c6962_0
+2025-06-23 18:17:30,644 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = b6738baed7759a04b726eaaff7e69cad70ab6cb23e6f36fc8c04a281dc4b99f28e27704d89459363eb1b5bd772800ed367e2a70853de276cc1f28e7cca5151c5_0
+2025-06-23 18:17:30,644 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" > <script  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 843400935820b9411bdab29a4345be8fe60679acf7518419bd13e3048d3255c4ee7a9ae8812f059ceab669c2bfa4a4317aec21a92a52badd7019185c476bf35f_0
+2025-06-23 18:17:30,645 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" > <script  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 843400935820b9411bdab29a4345be8fe60679acf7518419bd13e3048d3255c4ee7a9ae8812f059ceab669c2bfa4a4317aec21a92a52badd7019185c476bf35f_0
+2025-06-23 18:17:30,646 - semgrep.rule_match - DEBUG - match_key = (' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" > <script  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = 843400935820b9411bdab29a4345be8fe60679acf7518419bd13e3048d3255c4ee7a9ae8812f059ceab669c2bfa4a4317aec21a92a52badd7019185c476bf35f_0
+2025-06-23 18:17:30,646 - semgrep.rule_match - DEBUG - match_key = ('', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = b6738baed7759a04b726eaaff7e69cad70ab6cb23e6f36fc8c04a281dc4b99f28e27704d89459363eb1b5bd772800ed367e2a70853de276cc1f28e7cca5151c5_0
+2025-06-23 18:17:30,647 - semgrep.rule_match - DEBUG - match_key = (' src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" > <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = ccf2a5618405aa65d20e9f14f7e070245edf477a44ebd15c339d2006a46780ed729dc0a4f58182deda6e7a0bcdece48b09eb7b093c16e481308ea4c348f00281_0
+2025-06-23 18:17:30,647 - semgrep.rule_match - DEBUG - match_key = (' src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" > <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = ccf2a5618405aa65d20e9f14f7e070245edf477a44ebd15c339d2006a46780ed729dc0a4f58182deda6e7a0bcdece48b09eb7b093c16e481308ea4c348f00281_0
+2025-06-23 18:17:30,648 - semgrep.rule_match - DEBUG - match_key = (' src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" (?is).*integrity= (google-analytics\\.com|fonts\\.googleapis\\.com|fonts\\.gstatic\\.com|googletagmanager\\.com) .*rel\\s*=\\s*[\'"]?preconnect.* href="... :// ..." href="//..." href=\'... :// ...\' href=\'//...\' src="... :// ..." src="//..." src=\'... :// ...\' src=\'//...\' <link  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" > <script  src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" >...</script>', PosixPath('templates/base.html'), 'config..semgrep.vendored-rules.html.security.audit.missing-integrity') match_id = ccf2a5618405aa65d20e9f14f7e070245edf477a44ebd15c339d2006a46780ed729dc0a4f58182deda6e7a0bcdece48b09eb7b093c16e481308ea4c348f00281_0
+2025-06-23 18:17:30,650 - semgrep.core_runner - DEBUG - semgrep ran in 0:00:06.084658 on 21 files
+2025-06-23 18:17:30,652 - semgrep.core_runner - DEBUG - findings summary: 6 warning, 1 error, 0 info
+2025-06-23 18:17:30,654 - semgrep.app.auth - DEBUG - Getting API token from settings file
+2025-06-23 18:17:30,654 - semgrep.app.auth - DEBUG - No API token found in settings file
+2025-06-23 18:17:30,775 - semgrep.output - VERBOSE - 
+========================================
+Files skipped:
+========================================
+
+  Always skipped by Opengrep:
+
+   • <none>
+
+  Skipped by .gitignore:
+  (Disable by passing --no-git-ignore)
+
+   • <all files not listed by `git ls-files` were skipped>
+
+  Skipped by .semgrepignore:
+  - https://semgrep.dev/docs/ignoring-files-folders-code/#understand-semgrep-defaults
+
+   • <none>
+
+  Skipped by --include patterns:
+
+   • <none>
+
+  Skipped by --exclude patterns:
+
+   • <none>
+
+  Files skipped due to insufficient read permissions:
+
+   • <none>
+
+  Skipped by limiting to files smaller than 1000000 bytes:
+  (Adjust with the --max-target-bytes flag)
+
+   • <none>
+
+  Partially analyzed due to parsing or internal Opengrep errors
+
+   • templates/add_student.html (6 lines skipped)
+   • templates/dashboard.html (6 lines skipped)
+   • templates/home.html (8 lines skipped)
+   • templates/login.html (6 lines skipped)
+   • templates/profile.html (6 lines skipped)
+   • templates/register.html (6 lines skipped)
+   • templates/skills_by_course.html (11 lines skipped)
+   • templates/student_form.html (9 lines skipped)
+   • templates/view_students.html (14 lines skipped)
+
+2025-06-23 18:17:30,776 - semgrep.output - INFO - Some files were skipped or only partially analyzed.
+  Scan was limited to files tracked by git.
+  Partially scanned: 9 files only partially analyzed due to parsing or internal Opengrep errors
+
+Ran 509 rules on 21 files: 7 findings.
+2025-06-23 18:17:30,777 - semgrep.app.version - DEBUG - Version cache does not exist
+2025-06-23 18:17:30,797 - semgrep.metrics - VERBOSE - Not sending pseudonymous metrics since metrics are configured to OFF and registry usage is False

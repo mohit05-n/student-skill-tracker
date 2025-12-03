@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Student Skills Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 mx-auto text-center">
+        <div class="hero-section py-5">
+            <i class="fas fa-graduation-cap fa-5x text-primary mb-4"></i>
+            <h1 class="display-4 mb-4">Welcome to Student Skills Portal</h1>
+            <p class="lead mb-5">
+                A comprehensive platform to manage student profiles, track skills, and monitor certifications. 
+                Build your academic journey and showcase your achievements.
+            </p>
+            
+            {% if not current_user.is_authenticated %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg me-md-2">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Get Started
+                </a>
+                <a href="{{ url_for('login') }}" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-sign-in-alt me-2"></i>
+                    Login
+                </a>
+            </div>
+            {% else %}
+            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg me-md-2">
+                    <i class="fas fa-tachometer-alt me-2"></i>
+                    Go to Dashboard
+                </a>
+                <a href="{{ url_for('profile') }}" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-user me-2"></i>
+                    My Profile
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                <h5 class="card-title">Student Management</h5>
+                <p class="card-text">
+                    Create and manage comprehensive student profiles with detailed information, 
+                    skills tracking, and academic records.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-cogs fa-3x text-success mb-3"></i>
+                <h5 class="card-title">Skills Tracking</h5>
+                <p class="card-text">
+                    Organize and categorize skills by courses, track progress, 
+                    and maintain a comprehensive skills inventory.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <i class="fas fa-certificate fa-3x text-warning mb-3"></i>
+                <h5 class="card-title">Certifications</h5>
+                <p class="card-text">
+                    Store and manage professional certifications, track expiry dates, 
+                    and maintain credential information.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if not current_user.is_authenticated %}
+<div class="row mt-5">
+    <div class="col-lg-8 mx-auto">
+        <div class="card bg-primary">
+            <div class="card-body text-center text-white">
+                <h4 class="card-title">Ready to Get Started?</h4>
+                <p class="card-text">
+                    Join our platform today and start building your student profile. 
+                    Track your skills, manage certifications, and showcase your achievements.
+                </p>
+                <a href="{{ url_for('register') }}" class="btn btn-light btn-lg">
+                    <i class="fas fa-rocket me-2"></i>
+                    Create Account
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

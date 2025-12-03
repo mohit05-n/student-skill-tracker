@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}{{ student.username }} - Student Details{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-user-circle fa-5x text-primary mb-3"></i>
+                <h4>{{ student.username }}</h4>
+                <p class="text-muted">{{ student.email or 'No email provided' }}</p>
+                
+                <div class="row text-center mt-3">
+                    <div class="col-4">
+                        <strong>{{ student.skills|length }}</strong>
+                        <br><small class="text-muted">Skills</small>
+                    </div>
+                    <div class="col-4">
+                        <strong>{{ student.certifications|length }}</strong>
+                        <br><small class="text-muted">Certifications</small>
+                    </div>
+                    <div class="col-4">
+                        <strong>{{ student.created_at.strftime('%Y') }}</strong>
+                        <br><small class="text-muted">Joined</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0"><i class="fas fa-chart-bar me-2"></i>Skills by Course</h6>
+            </div>
+            <div class="card-body">
+                {% if student.skills %}
+                {% set skills_by_course = {} %}
+                {% for skill in student.skills %}
+                    {% if skills_by_course.update({skill.course: skills_by_course.get(skill.course, []) + [skill]}) %}{% endif %}
+                {% endfor %}
+                
+                {% for course, skills in skills_by_course.items() %}
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>{{ course }}</span>
+                    <span class="badge bg-primary">{{ skills|length }}</span>
+                </div>
+                {% endfor %}
+                {% else %}
+                <p class="text-muted text-center">No skills added</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <!-- Student Information -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-info-circle me-2"></i>Student Information</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Username:</strong></div>
+                    <div class="col-sm-9">{{ student.username }}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Email:</strong></div>
+                    <div class="col-sm-9">{{ student.email or 'Not provided' }}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Joined:</strong></div>
+                    <div class="col-sm-9">{{ student.created_at.strftime('%B %d, %Y') }}</div>
+                </div>
+                
+                <div class="row mb-3">
+                    <div class="col-sm-3"><strong>Bio:</strong></div>
+                    <div class="col-sm-9">
+                        {% if student.bio %}
+                        <p>{{ student.bio }}</p>
+                        {% else %}
+                        <em class="text-muted">No bio provided</em>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Skills -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-cogs me-2"></i>Skills</h5>
+            </div>
+            <div class="card-body">
+                {% if student.skills %}
+                {% set skills_by_course = {} %}
+                {% for skill in student.skills %}
+                    {% if skills_by_course.update({skill.course: skills_by_course.get(skill.course, []) + [skill]}) %}{% endif %}
+                {% endfor %}
+                
+                {% for course, skills in skills_by_course.items() %}
+                <div class="mb-3">
+                    <h6 class="text-primary">{{ course }}</h6>
+                    <div class="d-flex flex-wrap gap-2">
+                        {% for skill in skills %}
+                        <span class="badge bg-secondary p-2">
+                            {{ skill.name }}
+                            {% if skill.description %}
+                            <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" title="{{ skill.description }}"></i>
+                            {% endif %}
+                        </span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-cogs fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No skills added yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Certifications -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-certificate me-2"></i>Certifications</h5>
+            </div>
+            <div class="card-body">
+                {% if student.certifications %}
+                <div class="row">
+                    {% for cert in student.certifications %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card border-start border-4 border-warning">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ cert.name }}</h6>
+                                <p class="card-text">
+                                    <strong>Issuer:</strong> {{ cert.issuer }}<br>
+                                    <strong>Issue Date:</strong> {{ cert.issue_date.strftime('%B %d, %Y') }}<br>
+                                    {% if cert.expiry_date %}
+                                    <strong>Expiry Date:</strong> 
+                                    <span class="{% if cert.expiry_date < today %}text-danger{% elif (cert.expiry_date - today).days < 30 %}text-warning{% endif %}">
+                                        {{ cert.expiry_date.strftime('%B %d, %Y') }}
+                                    </span><br>
+                                    {% endif %}
+                                    {% if cert.credential_id %}
+                                    <strong>Credential ID:</strong> <code>{{ cert.credential_id }}</code>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="text-center py-4">
+                    <i class="fas fa-certificate fa-3x text-muted mb-3"></i>
+                    <p class="text-muted">No certifications added yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 text-center">
+        <a href="{{ url_for('view_students') }}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left me-2"></i>Back to Students
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Initialize tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+</script>
+{% endblock %}
